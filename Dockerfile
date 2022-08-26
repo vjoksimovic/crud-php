@@ -1,4 +1,3 @@
 FROM nginx:alpine
 COPY static /usr/share/nginx/html
-RUN apk update \
-    && docker-php-ext-install pdo pdo_mysql php-fpm
+CMD apk update && apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl pdo_mysql
