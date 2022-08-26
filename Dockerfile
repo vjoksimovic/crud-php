@@ -1,6 +1,6 @@
 FROM nginx:alpine
 COPY static /usr/share/nginx/html
-CMD sudo apk --update add \
+CMD apk --update add \
             php7 \
             php7-bcmath \
             php7-ctype \
