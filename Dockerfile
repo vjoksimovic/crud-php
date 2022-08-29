@@ -1,11 +1,4 @@
 FROM nginx:alpine
-RUN apk add php8 php8-fpm php8-opcache
-RUN apk add php8-gd php8-zlib php8-curl
-COPY server/etc/nginx /etc/nginx
-COPY server/etc/php /etc/php8
-COPY src /usr/share/nginx/html
-RUN mkdir /var/run/php
-EXPOSE 80
-EXPOSE 443
-STOPSIGNAL SIGTERM
-CMD ["/bin/bash", "-c", "php-fpm8 && chmod 777 /var/run/php/php8-fpm.sock && chmod 755 /usr/share/nginx/html/* && nginx -g 'daemon off;'"]
+RUN apk add --no-cache php81 php81-fpm php81-opcache
+COPY static /usr/share/nginx/html
+CMD ["/bin/bash","php8_fpm && chmod 755 /usr/share/nginx/html/*"]
