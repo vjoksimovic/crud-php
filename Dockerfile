@@ -1,4 +1,4 @@
 FROM nginx:latest
-RUN apt update && apt install -y php-cli php-fpm php-json php-mysql php-zip php-gd  php-mbstring php-curl php-xml php-pear php-bcmath
-COPY static/ /var/www/html/
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+RUN apt-get update \
+    && docker-php-ext-install pdo pdo_mysql \
+COPY static/ /var/www/html/ \
