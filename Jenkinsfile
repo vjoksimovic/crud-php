@@ -50,23 +50,23 @@ pipeline {
                     }
                 }
             }
-
-
-        stage('Pull Ansible repository') {
-                    steps {
-                        script {
-                            git 'https://github.com/vjoksimovic/ansible-projekat.git'
-                        }
-                    }
-                }
-
-        stage('Start application with Ansible') {
-                    steps {
-                        script {
-                            ansiblePlaybook credentialsId: 'ansible-jenkins', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'main.yml'
-                        }
-                    }
-                }
         }
+
+            stage('Pull Ansible repository') {
+                        steps {
+                            script {
+                                git 'https://github.com/vjoksimovic/ansible-projekat.git'
+                            }
+                        }
+                    }
+
+            stage('Start application with Ansible') {
+                        steps {
+                            script {
+                                ansiblePlaybook credentialsId: 'ansible-jenkins', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'main.yml'
+                            }
+                        }
+                    }
+            }
     }
 }
