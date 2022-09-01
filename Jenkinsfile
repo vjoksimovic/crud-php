@@ -12,7 +12,7 @@ pipeline {
         stage('Pull Terraform infrastructure') {
                     steps {
                         script {
-                            git 'github.com/vjoksimovic/jenkins-tf-lamp.git'
+                            git 'https://github.com/vjoksimovic/jenkins-tf-lamp.git'
                         }
                     }
                 }
