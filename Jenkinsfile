@@ -1,29 +1,10 @@
 pipeline {
     agent any
-    tools {
-     terraform 'terraform'
-    }
     options {
         skipStagesAfterUnstable()
     }
 
     stages {
-
-        stage('Pull Terraform infrastructure') {
-                    steps {
-                        script {
-                            git 'https://github.com/vjoksimovic/jenkins-tf-lamp.git'
-                        }
-                    }
-                }
-
-        stage('Apply Terraform infrastructure') {
-                    steps {
-                        script {
-                            sh 'terraform apply -var-file="secrets.tfvars"'
-                        }
-                    }
-                }
 
         stage('Pull application repository') {
             steps {
@@ -51,21 +32,5 @@ pipeline {
                 }
             }
         }
-
-            stage('Pull Ansible repository') {
-                        steps {
-                            script {
-                                git 'https://github.com/vjoksimovic/ansible-projekat.git'
-                            }
-                        }
-                    }
-
-            stage('Start application with Ansible') {
-                        steps {
-                            script {
-                                ansiblePlaybook credentialsId: 'ansible-jenkins', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'main.yml'
-                            }
-                        }
-                    }
-            }
     }
+}
